@@ -1,0 +1,7 @@
+git config --global user.name Nickhun0714
+git config --global user.email nickhun0714@gmail.com
+
+
+git pull
+git commit -m Test
+git push
