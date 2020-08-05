@@ -4,10 +4,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
+//const passport = require('passport');
 
 module.exports = {
 
-    getAll: (req, res) => {
+    getAll:  (req, res) => {
         User.findAll()
             .then(user => {
                 res.json(user);
@@ -34,6 +35,7 @@ module.exports = {
         })
     },
 
+
     register: (req, res) => {
         const today = new Date();
         const userData = {
@@ -53,7 +55,10 @@ module.exports = {
                         userData.password = hash;
                         User.create(userData)
                             .then(user => {
-                                res.json({ status: user.username + ' Registered' })
+                                let payload = {subject: user.id}
+                                let token = jwt.sign(payload, process.env.SECRET_KEY)
+                                res.status(200).send({token})
+                                //res.json({ status: user.username + ' Registered' })
                             })
                             .catch(err => {
                                 res.send('error: ' + err)
@@ -68,6 +73,7 @@ module.exports = {
                 res.send('error: ' + err)
             })
     },
+
 
     profile: (req, res) => {
         var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
@@ -98,7 +104,7 @@ module.exports = {
             .then(user => {
                 if (user) {
                     if (bcrypt.compareSync(req.body.password, user.password)) {
-                        //
+                        
                         const payload = {
                             id: user.id,
                             username: user.username,
@@ -109,9 +115,11 @@ module.exports = {
                         let token = jwt.sign(payload, process.env.SECRET_KEY, {
                             expiresIn: 1440
                         })
-                        res.json({ token: token })
+
+                       res.status(200).send({token});
+                        // res.json({ "token": token, "username": payload.username, "password": payload.password })
                     } else {
-                        res.send('User does not exist')
+                        res.send('Password is incorrect')
                     }
                 } else {
                     res.json({ error: "User does not exist" })
@@ -120,6 +128,6 @@ module.exports = {
             .catch(err => {
                 res.send('error: ' + err)
             })
-    },
+    }
 
 }

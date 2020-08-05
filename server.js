@@ -6,6 +6,8 @@ const cors = require('cors');
 const logger = require('morgan');   //developer tool, console logban tájékoztat
 const dbConn = require('./config/dbMySQL');
 const app = express(); 
+const passport = require('passport');
+
 
 //Db connection test
 dbConn.sequelize.authenticate()
@@ -21,10 +23,20 @@ app.get('/', (req,res)=>{
     res.send("<h1>Default page</h1>")
 })
 
+//Static folder
+app.use(express.static(path.join(__dirname, `public`)));
+
+
 //User Routes
 var UserRoute = require('./routes/userRoute');
-app.use('/user', UserRoute);
+app.use('/api', UserRoute);
 
+
+//Error page
+app.get('*', (req, res) => {
+    //res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.send("ERROR");
+  });
 
 //Start server
 app.listen(port, ()=>{

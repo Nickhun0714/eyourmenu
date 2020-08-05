@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a href="#" class="navbar-brand">EYM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-taget="navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLinkActive="active" routerLink="/user-list" class="nav-link">Users</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <a routerLink="/login" *ngIf="!_authService.loggedIn()" routerLinkActive="active" class="nav-link">Login</a>
+      <a routerLink="/register" *ngIf="!_authService.loggedIn()" routerLinkActive="active" class="nav-link">Register</a>
+      <a style="cursor:pointer" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()" class="nav-link">Logout</a>
+    </ul>
+
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
