@@ -11,7 +11,7 @@ const passport = require('passport');
 
 //Db connection test
 dbConn.sequelize.authenticate()
-    .then(()=> console.log('Database connected with sequelize, ~mysql~'))
+    .then(()=> console.log('Database connected correctly with sequelize, ~mysql~'))
     .catch(err => console.log('error with connection: ',err));
     
 app.use(cors());
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(logger('short')); //Betöltési idejét mutatja a console logban. (combined, dev is létezik)
 
 app.get('/', (req,res)=>{
-    res.send("<h1>Default page</h1>")
+    res.send("<h1>E-your menu backend server</h1>")
 })
 
 //Static folder

@@ -12,6 +12,10 @@ import { AuthService } from './auth.service';
 import {AuthGuard} from './auth.guard';
 import { UserListService } from './user-list.service';
 import {TokenInterceptorService} from './token-interceptor.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { IndexComponent } from './index/index.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import {TokenInterceptorService} from './token-interceptor.service';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    UserListComponent
+    UserListComponent,
+    PageNotFoundComponent,
+    HeaderComponent,
+    IndexComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

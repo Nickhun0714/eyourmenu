@@ -28,7 +28,8 @@ function verifyToken(req,res,next){
 router.get('/', (req,res)=>{
     res.redirect('/');
 })
-router.get('/getAll', verifyToken, UserController.getAll);
+//verifyToken
+router.get('/getAll',  UserController.getAll);
 router.get('/getUser/:id', UserController.getByID);
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
