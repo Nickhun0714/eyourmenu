@@ -1,13 +1,11 @@
 const express = require('express');
 const path = require('path');
-const port = process.env.PORT || 3010; //Port number
+const port = process.env.PORT || 3010;
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const logger = require('morgan');   //developer tool, console logban tájékoztat
+const logger = require('morgan');
 const dbConn = require('./config/dbMySQL');
 const app = express(); 
-const passport = require('passport');
-
 
 //Db connection test
 dbConn.sequelize.authenticate()
