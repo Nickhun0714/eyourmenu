@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
+const nodemailer = require('nodemailer');
+
 
 module.exports = {
 
@@ -56,6 +58,34 @@ module.exports = {
                             .then(user => {
                                 let payload = {subject: user.id}
                                 let token = jwt.sign(payload, process.env.SECRET_KEY)
+                                let confirmUrl = 'http://localhost:3010/api/confirm/'+token
+                                
+                                //email
+                                let transporter = nodemailer.createTransport({
+                                    service: 'gmail',
+                                    auth: {
+                                        user: 'nickhun0714@gmail.com',
+                                        pass: 'sony0714',
+                                
+                                    }
+                                });
+                                
+                                var mailOptions = {
+                                    from: 'nickhun0714@gmail.com',
+                                    to: 'zoli19950714@gmail.com',
+                                    subject: 'Confirm your account',
+                                    html: 'Confirm your account, <br> click this link: <a href="'+confirmUrl+'">Link</a> '
+                                };
+                                
+                                transporter.sendMail(mailOptions, (err,data)=>{
+                                    if(err){
+                                        console.log('Error occurs: ',err);
+                                    }   else{
+                                        console.log('Email sent');
+                                    }
+                                });
+                                //email end
+
                                 res.status(200).send({token})
                                 //res.json({ status: user.username + ' Registered' })
                             })

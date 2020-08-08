@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
     private _router:Router) { }
 
   ngOnInit(): void {
+    
     this._userListService.getAll()
     .subscribe(
       res=>this.users = res,

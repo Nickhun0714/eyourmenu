@@ -17,10 +17,13 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
     this._auth.registerUser(this.registerUserData)
     .subscribe(
       res=>{console.log(res)
           localStorage.setItem('token', res.token)
+          localStorage.setItem('currentUser',  this.registerUserData.username)
           this._router.navigate(['/user-list'])
       },
       err=>console.log(err)

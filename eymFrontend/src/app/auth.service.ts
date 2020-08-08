@@ -20,12 +20,19 @@ export class AuthService {
     }
 
     loggedIn(){
+      //console.log(localStorage.getItem('token'));
       return !!localStorage.getItem('token');
+
     }
     
     logoutUser(){
       localStorage.removeItem('token');
+      localStorage.removeItem('currentUser');
       this._router.navigate(['/user-list']);
+    }
+
+    getUsername(){
+      return localStorage.getItem('currentUser');
     }
 
     getToken(){
