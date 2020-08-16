@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HeaderComponent } from './shared/header/header.component';
 import { IndexComponent } from './index/index.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ConfirmedComponent } from './shared/confirmed/confirmed.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     PageNotFoundComponent,
     HeaderComponent,
     IndexComponent,
-    FooterComponent
+    FooterComponent,
+    ConfirmedComponent
   ],
   imports: [
     BrowserModule,

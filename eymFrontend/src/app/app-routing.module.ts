@@ -7,6 +7,7 @@ import {AuthGuard} from './auth.guard';
 import { UserListService } from './user-list.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { IndexComponent } from './index/index.component';
+import { ConfirmedComponent } from './shared/confirmed/confirmed.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'auth/confirmed/:emailToken',
+    component: ConfirmedComponent
   },
   {
     path:'**',

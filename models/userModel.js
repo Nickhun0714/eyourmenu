@@ -2,22 +2,39 @@ const Sequelize = require('sequelize');
 const dbConn = require('../config/dbMySQL');
 
 const User = dbConn.sequelize.define(
-    `user`, {
-    id: {
+    `customer`, {
+    User_ID: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    username: {
+    Name: {
+        type: Sequelize.STRING
+    },    
+    Username: {
         type: Sequelize.STRING
     },
-    password: {
+    Password: {
         type: Sequelize.STRING
     },
-    reg_date: {
+    Email: {
+        type: Sequelize.STRING
+    },
+    Zipcode: {
+        type: Sequelize.STRING
+    },
+    Confirm: {
+        type: Sequelize.BOOLEAN,
+        defaultValue : 0
+    },
+    Reg_date: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
-    }
+    },
+    Newsletter: {
+        type: Sequelize.BOOLEAN,
+        defaultValue : 0
+    },
 },
     {
         timestamps: 0

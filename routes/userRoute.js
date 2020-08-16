@@ -31,6 +31,7 @@ router.get('/', (req,res)=>{
 //verifyToken
 router.get('/getAll',  UserController.getAll);
 router.get('/getUser/:id', UserController.getByID);
+router.post('/tokenCompare',  UserController.tokenCompare);
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 router.get('/profile', UserController.profile);

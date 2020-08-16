@@ -7,7 +7,8 @@ import {Router} from '@angular/router';
 })*/
 export class AuthService {
   private _registerUrl = "http://localhost:3010/api/register";
-  private _loginUrl = "http://localhost:3010/api/login"
+  private _loginUrl = "http://localhost:3010/api/login";
+  private _tokenCompareUrl = "http://localhost:3010/api/tokenCompare"
   constructor(private http: HttpClient,
     private _router: Router) { }
 
@@ -37,6 +38,11 @@ export class AuthService {
 
     getToken(){
       return localStorage.getItem('token');
+    }
+
+    getTokenCompare(usnm){
+
+      return this.http.post<any>(this._tokenCompareUrl, usnm);
     }
   
 }

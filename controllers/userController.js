@@ -37,42 +37,65 @@ module.exports = {
     },
 
 
+    // confirm: (req,res)=>{
+    //     var urlToken = req.params.token;
+    //     var token = 
+
+
+    // },
+    tokenCompare:(req,res)=>{
+        const usrnmTmp = req.body.usnm;
+
+        User.update(
+            {Confirm:1},
+            {where: {Username: usrnmTmp}}
+        )
+
+    },
+
+
     register: (req, res) => {
         const today = new Date();
         const userData = {
-            username: req.body.username,
-            password: req.body.password,
-            reg_date: today
+            Name: req.body.firstname+' '+req.body.lastname,
+            Username: req.body.username,
+            Password: req.body.password,
+            Email: req.body.email,
+            Zipcode: req.body.zip,
+            Confirm: 0,
+            Reg_date: today,
+            Newsletter: req.body.newsletter
         }
 
         User.findOne({
             where: {
-                username: req.body.username
+                Username: req.body.username
             }
         })
             .then(user => {
                 if (!user) {
                     bcrypt.hash(req.body.password, 10, (err, hash) => {
-                        userData.password = hash;
+                        userData.Password = hash;
+
                         User.create(userData)
                             .then(user => {
-                                let payload = {subject: user.id}
+                                let payload = {subject: user.User_ID}
                                 let token = jwt.sign(payload, process.env.SECRET_KEY)
-                                let confirmUrl = 'http://localhost:3010/api/confirm/'+token
+                                let confirmUrl = 'http://localhost:4200/auth/confirmed/'+token
                                 
                                 //email
                                 let transporter = nodemailer.createTransport({
                                     service: 'gmail',
                                     auth: {
-                                        user: 'nickhun0714@gmail.com',
-                                        pass: '####',
+                                        user: process.env.MAIL_FROM,
+                                        pass: process.env.MAIL_FROM_PASSWORD,
                                 
                                     }
                                 });
                                 
                                 var mailOptions = {
-                                    from: 'nickhun0714@gmail.com',
-                                    to: 'zoli19950714@gmail.com',
+                                    from: process.env.MAIL_FROM,
+                                    to: req.body.email,
                                     subject: 'Confirm your account',
                                     html: 'Confirm your account, <br> click this link: <a href="'+confirmUrl+'">Link</a> '
                                 };
@@ -127,18 +150,17 @@ module.exports = {
     login: (req, res) => {
         User.findOne({
             where: {
-                username: req.body.username
+                Username: req.body.username
             }
         })
             .then(user => {
                 if (user) {
-                    if (bcrypt.compareSync(req.body.password, user.password)) {
+                    if (bcrypt.compareSync(req.body.password, user.Password)) {
                         
                         const payload = {
-                            id: user.id,
-                            username: user.username,
-                            password: user.password,
-                            reg_date: user.reg_date
+                            ID: user.User_ID,
+                            Username: user.Username,
+                            Password: user.Password
                         }
                         //  let token = jwt.sign(user.dataValues, process.env.SECRET_KEY,{
                         let token = jwt.sign(payload, process.env.SECRET_KEY, {
