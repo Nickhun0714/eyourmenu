@@ -3,12 +3,12 @@
         <div *ngFor="let user of users" class="col-md-4 mb-3">
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">{{ user.username }}</h5>
-                    <p class="card-text">{{user.password}}</p>
+                    <h5 class="card-title">{{ user.Username }}</h5>
+                    <p class="card-text">{{user.Password}}</p>
                     <a href="#" class="btn btn-primary">Details</a>
                 </div>
                 <div class="card-footer text-muted">
-                    {{user.reg_date | date:'shortDate'}}
+                    {{user.Reg_date | date:'shortDate'}}
                 </div>
             </div>
         </div>

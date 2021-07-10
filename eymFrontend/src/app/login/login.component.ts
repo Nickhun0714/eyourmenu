@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       res=>{console.log(res)
         localStorage.setItem('token', res.token)
         localStorage.setItem('currentUser', this.loginUserData.username)
-        this._router.navigate(['/user-list'])
+        this._router.navigate(['/index'])
     },
       err=>console.log(err)
     )

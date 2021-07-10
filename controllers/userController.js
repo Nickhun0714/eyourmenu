@@ -29,13 +29,14 @@ module.exports = {
                 res.json(user);
             })
     },
-    create: (req, res) => {
+
+   /* create: (req, res) => {
         var usr = new User({
             username: req.body.username,
             password: req.body.password
         })
     },
-
+    */
 
     // confirm: (req,res)=>{
     //     var urlToken = req.params.token;
@@ -43,6 +44,7 @@ module.exports = {
 
 
     // },
+
     tokenCompare:(req,res)=>{
         const usrnmTmp = req.body.usnm;
 
@@ -61,10 +63,11 @@ module.exports = {
             Username: req.body.username,
             Password: req.body.password,
             Email: req.body.email,
+            Role_ID: 1,
             Zipcode: req.body.zip,
             Confirm: 0,
-            Reg_date: today,
-            Newsletter: req.body.newsletter
+            Newsletter: req.body.newsletter ? req.body.newsletter : 0,
+            Reg_date: today
         }
 
         User.findOne({
@@ -73,16 +76,18 @@ module.exports = {
             }
         })
             .then(user => {
+
                 if (!user) {
                     bcrypt.hash(req.body.password, 10, (err, hash) => {
                         userData.Password = hash;
-
+                        console.log(userData)
                         User.create(userData)
                             .then(user => {
                                 let payload = {subject: user.User_ID}
                                 let token = jwt.sign(payload, process.env.SECRET_KEY)
                                 let confirmUrl = 'http://localhost:4200/auth/confirmed/'+token
-                                
+                                console.log(confirmUrl);
+                                console.log(process.env.MAIL_FROM_PASSWORD)
                                 //email
                                 let transporter = nodemailer.createTransport({
                                     service: 'gmail',

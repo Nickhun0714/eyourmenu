@@ -17,6 +17,8 @@ import { HeaderComponent } from './shared/header/header.component';
 import { IndexComponent } from './index/index.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ConfirmedComponent } from './shared/confirmed/confirmed.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { ConfirmedComponent } from './shared/confirmed/confirmed.component';
     HeaderComponent,
     IndexComponent,
     FooterComponent,
-    ConfirmedComponent
+    ConfirmedComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

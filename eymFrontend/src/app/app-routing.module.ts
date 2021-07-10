@@ -8,6 +8,8 @@ import { UserListService } from './user-list.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { IndexComponent } from './index/index.component';
 import { ConfirmedComponent } from './shared/confirmed/confirmed.component';
+import {ContactComponent} from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'index',
+    path: '',
     component: IndexComponent
   },
   {
@@ -35,6 +37,15 @@ const routes: Routes = [
   {
     path: 'auth/confirmed/:emailToken',
     component: ConfirmedComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
+    ,canActivate: [AuthGuard]
+  },
+  {
+    path:'about-us',
+    component: AboutComponent
   },
   {
     path:'**',

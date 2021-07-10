@@ -16,9 +16,12 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     
+    console.log(this._userListService.getAll)
+
+
     this._userListService.getAll()
     .subscribe(
-      res=>this.users = res,
+      res=>{this.users = res},
       err=>{
         if(err instanceof HttpErrorResponse){
           if(err.status ===401){

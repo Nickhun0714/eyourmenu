@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       res=>{console.log(res)
           localStorage.setItem('token', res.token)
           localStorage.setItem('currentUser',  this.registerUserData.username)
-          this._router.navigate(['/user-list'])
+          this._router.navigate(['/index'])
       },
       err=>console.log(err)
     )

@@ -9,9 +9,11 @@ export class UserListService {
     
   private _userUrl = "http://localhost:3010/api/getAll";
 
-  constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient) {
+  }
+  
   getAll(){
     return this.http.get<any>(this._userUrl);
   }
+  
 }
